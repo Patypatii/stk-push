@@ -3,6 +3,7 @@ import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import dotenv from 'dotenv';
 import bodyParser from 'body-parser';
+import { authToken } from './middlewares/authorization.js';
 
 
 
@@ -29,14 +30,14 @@ app.set('views', path.join(__dirname, 'views'));
 
 
 
-app.get("/", async(req, res) => {
+app.get("/", authToken, async (req, res) => {
   res.render('payment');
-  });
+});
 
 
-app.listen(port,  () => {
+app.listen(port, () => {
 
   console.log(`Server running on port ${port}`);
 
-  });
-  
+});
+
