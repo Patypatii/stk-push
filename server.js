@@ -4,6 +4,7 @@ import { fileURLToPath } from 'url';
 import dotenv from 'dotenv';
 import bodyParser from 'body-parser';
 import { authToken } from './middlewares/authorization.js';
+import router from './routes/lipaNaMpesa.js'
 
 
 
@@ -28,9 +29,10 @@ app.use('/static', express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
+app.use(router)
 
 
-app.get("/", authToken, async (req, res) => {
+app.get("/", async (req, res) => {
   res.render('payment');
 });
 
